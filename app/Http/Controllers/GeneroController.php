@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genero;
+use App\Filme;
 use Illuminate\Http\Request;
 
 class GeneroController extends Controller
@@ -76,7 +77,7 @@ class GeneroController extends Controller
      */
     public function edit(Genero $genero)
     {
-        //
+        return view('generos.edit', compact('genero'));
     }
 
     /**
@@ -88,7 +89,11 @@ class GeneroController extends Controller
      */
     public function update(Request $request, Genero $genero)
     {
-        //
+        $genero->nome = $request->nome;
+
+        $genero->save();
+
+        return redirect('/generos');
     }
 
     /**
@@ -99,6 +104,7 @@ class GeneroController extends Controller
      */
     public function destroy(Genero $genero)
     {
-        //
+        $genero->delete();
+        return redirect('/generos');
     }
 }

@@ -18,7 +18,7 @@
 
                     </div>
                     <div class='form-group'>
-                        <label for='ano'>Ano nascimento</label>
+                        <label for='ano'>Ano de Nascimento</label>
                         <input id='ano' class='form-control' type='text' name='ano' placeholder='Ano'>
 
                     </div>

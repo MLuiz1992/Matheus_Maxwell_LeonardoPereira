@@ -61,6 +61,6 @@
         </div>
     </div>
     @else
-    <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Espertão</h1>
+    <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Animal de teta!</h1>
     @endif
 @endsection

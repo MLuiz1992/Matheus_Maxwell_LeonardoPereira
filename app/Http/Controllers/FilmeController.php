@@ -42,15 +42,15 @@ class FilmeController extends Controller
     public function store(Request $request)
     {
 
-       
-
+       //cria um novo filme
         $filme = new Filme();
+        //coloca os dados no filme  
         $filme->titulo = $request->titulo;
         $filme->ano = $request->ano;
         $filme->genero_id = $request->genero;
-
+        //salva o filme
         $filme->save();
-
+        //retorna :D
         return redirect('filmes');
     }
 
@@ -62,7 +62,7 @@ class FilmeController extends Controller
      */
     public function show(Filme $filme)
     {
-        //
+
     }
 
     /**
@@ -73,7 +73,8 @@ class FilmeController extends Controller
      */
     public function edit(Filme $filme)
     {
-        //
+       $generos = Genero::all();
+       return view('filmes.edit', compact('filme', 'generos'));
     }
 
     /**
@@ -85,7 +86,13 @@ class FilmeController extends Controller
      */
     public function update(Request $request, Filme $filme)
     {
-        //
+        $filme->titulo = $request->titulo;
+        $filme->ano = $request->ano;
+        $filme->genero_id = $request->genero;
+
+        $filme->save();
+
+        return redirect('/filmes');
     }
 
     /**
@@ -96,6 +103,7 @@ class FilmeController extends Controller
      */
     public function destroy(Filme $filme)
     {
-        //
+        $filme->delete();
+        return redirect('/filmes');
     }
 }
