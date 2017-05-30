@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<?php
-        if (Auth::check()){
-            ?> <div class='container'>
+ @if (Auth::check())
+     <div class='container'>
         <div class='row'>
 
             <h1 class='page-header'>Inserção de Atores</h1>
@@ -28,9 +27,8 @@
                 </form>
             </div>
         </div>
-    </div> <?php
-        }else{
-            echo "<h1 class='text-center'>Faça o login para poder cadastrar os atores</h1>";
-        }
-        ?>
+    </div> 
+    @else
+        <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Animal de teta!</h1>
+@endif
         @endsection

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Genero;
+use App\Lista;
 use App\Filme;
 use Illuminate\Http\Request;
 
-class GeneroController extends Controller
+class ListaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,9 @@ class GeneroController extends Controller
      */
     public function index()
     {
+        $listas = Lista::with('filme')->get();
 
-        //return $genero = Genero::with('filmes')->get();
-
-        //buscar todos os dados
-        $generos = Genero::all();
-
-        //repassar para a view
-        return view('generos.index', compact('generos'));
-
+        return view('listas.index', compact('filme', 'listas'));
     }
 
     /**
@@ -33,7 +27,8 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        return view('generos.create');
+        $filmes = Filme::all();        
+        return view('listas.create', compact('filmes'));
     }
 
     /**
@@ -44,27 +39,24 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //cria um novo genero
-        $genero = new Genero();
-        
-        //coloca os dados dentro do genero
-        $genero->nome = $request->nome;
-
-        //salva o genero
-        $genero->save();
-        
-
+        //cria uma lista
+        $lista = new Lista();
+        //pega os dados da lista
+        $lista->filme_id = $request->filme;
+        //salva a lista
+        $lista->save();
         //retorna ;D
-        return redirect('/generos');
+        return redirect('listas');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Genero  $genero
+     * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function show(Genero $genero)
+    public function show(Lista $lista)
     {
         //
     }
@@ -72,39 +64,42 @@ class GeneroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Genero  $genero
+     * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function edit(Genero $genero)
+    public function edit(Lista $lista)
     {
-        return view('generos.edit', compact('genero'));
+        $filmes = Filme::all();
+        return view('listas.edit', compact('filme', 'listas'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Genero  $genero
+     * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Genero $genero)
+    public function update(Request $request, Lista $lista)
     {
-        $genero->nome = $request->nome;
+        $lista->titulo = $request->titulo;
+        $lista->filme_id = $request->filme;
+        $lista->save();
+        return redirect('listas');
 
-        $genero->save();
-
-        return redirect('/generos');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Genero  $genero
+     * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Genero $genero)
+    public function destroy(Lista $lista)
     {
-        $genero->delete();
-        return redirect('/generos');
+        $lista->delete();
+        return redirect('listas');
+
     }
 }

@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-6">
                 <h1 class="page-header">
-                    Lista de Atores 
-                <a href="/atores/create" class="btn">Cadastrar</a>
+                    Lista de Reprodução 
+                <a href="/listas/create" class="btn">Cadastrar</a>
                     
                 </h1>
 
@@ -18,26 +18,24 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nome</th>
-                                    <th>Ano Nascimento</th>
+                                    <th>Id Lista</th>
+                                    <th>Id Filme</th>
                                     <th></th>
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($atores as $ator)
+                                @foreach($listas as $lista)
                                 <tr>
-                                    <td>{{$ator->id}}</td>
-                                    <td>{{$ator->Nome}}</td>
-                                    <td>{{$ator->Ano}}</td>
+                                    <td>{{$lista->id}}</td>
+                                    <td>{{$lista->filme_id}}</td>
                                     <td>
-                                        <a class="btn" href="/atores/{{$ator->id}}/edit">
+                                        <a class="btn" href="/listas/{{$lista->id}}/edit">
                                             Editar
                                         </a>
 
-                                        <form style="display: inline;" action="{{route('atores.destroy', $ator->id)}}" method="post">
+                                        <form style="display: inline;" action="{{route('listas.destroy', $lista->id)}}" method="post">
                                         
                                              {{csrf_field()}}
 
@@ -61,6 +59,6 @@
         </div>
     </div>
     @else
-    <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Animar de teta!</h1>
+    <h1 class="text-center">Opa fion,n eh admin?, tá em manutenção meu parssa...</h1>
     @endif
 @endsection

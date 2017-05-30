@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@if(Auth::check())
     <div class="container">
         <div class="row">
 
@@ -23,4 +23,7 @@
             </div>
         </div>
     </div>
+    @else
+        <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Animal de teta!</h1>
+@endif
 @endsection
