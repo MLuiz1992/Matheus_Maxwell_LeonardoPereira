@@ -5,9 +5,9 @@
             <div class="col-md-12">
                 <h1 class="page-header">Lista de Gêneros</h1>
 
-                <a href="/generos/create" class="btn btn-primary" style="margin-bottom: 15px;">Cadastrar</a>
+                <a href="/generos/create" class="btn" style="margin-bottom: 15px;">Cadastrar</a>
 
-                <div class="panel panel-primary">
+                <div class="panel">
                     <div class="panel-heading">Tabela de Dados</div>
                     <div class="panel-body">
 

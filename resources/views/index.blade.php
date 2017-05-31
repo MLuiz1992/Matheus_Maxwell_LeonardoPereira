@@ -5,6 +5,6 @@
             <p><a class="btn col-md-12" href="/atores">Atores</a></p>&nbsp
             <p><a class="btn col-md-12" href="/generos">Gêneros</a></p>&nbsp
             <p><a class="btn col-md-12" href="/filmes">Filmes</a></p>&nbsp
-            <p><a class="btn col-md-12" href="/listas">Listas</a></p>
+            <p><a class="btn col-md-12" href="/listas">Listas - Not Working Yet</a></p>
             </div>
         @endsection

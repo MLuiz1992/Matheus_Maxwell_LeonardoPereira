@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lista extends Model
 {
-   public function filme()
+   public function filmes()
     {
-        return $this->belongsTo('App\Filme');
+        return $this->belongsToMany('Filme');
     }
    public function user()
     {

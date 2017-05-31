@@ -53,14 +53,8 @@
                                 <button type="submit" class="btn">
                                     Login
                                 </button>
-
-<<<<<<< HEAD
                                 <a class="btn" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-=======
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Esqueceu a senha?
->>>>>>> 92c25b5bea21812d340599591a34eb986dfb5fbd
                                 </a>
                             </div>
                         </div>

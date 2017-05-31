@@ -62,13 +62,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-<<<<<<< HEAD
                                 <button type="submit" class="btn">
-                                    Register
-=======
-                                <button type="submit" class="btn btn-primary">
                                     Registrar
->>>>>>> 92c25b5bea21812d340599591a34eb986dfb5fbd
                                 </button>
                             </div>
                         </div>

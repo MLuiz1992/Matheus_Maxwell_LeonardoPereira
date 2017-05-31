@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FilmeLista extends Migration
+class ListasFilmes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class FilmeLista extends Migration
      */
     public function up()
     {
-        Schema::create('listas', function (Blueprint $table) {
-            $table->increments('lista_id');
-            $table->integer('filme_id');
+        Schema::create('filme_lista', function (Blueprint $table) {
+            $table->integer('lista_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class FilmeLista extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listas');
+        //
     }
 }

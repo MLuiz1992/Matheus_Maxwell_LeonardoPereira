@@ -5,7 +5,7 @@
             <div class="col-md-6">
                 <h1 class="page-header">
                     Lista de Filmes 
-                <a href="/filmes/create" class="btn btn-primary">Cadastrar</a>
+                <a href="/filmes/create" class="btn">Cadastrar</a>
                     
                 </h1>
 

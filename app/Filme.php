@@ -11,9 +11,9 @@ class Filme extends Model
         return $this->belongsTo('App\Genero');
     }
 
-    public function lista()
+    public function listas()
     {
-        return $this->belongsToMany('App\Lista');
+        return $this->belongsToMany('Lista');
     }
     
     public function user()

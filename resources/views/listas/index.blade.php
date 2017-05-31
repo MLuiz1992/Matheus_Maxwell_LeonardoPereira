@@ -18,15 +18,15 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Id Lista</th>
-                                    <th>Id Filme</th>
+                                    <th>Lista</th>
+                                    <th>Filme</th>
                                     <th></th>
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($listas as $lista)
+                                @foreach($filmes->listas as $lista)
                                 <tr>
                                     <td>{{$lista->id}}</td>
                                     <td>{{$lista->filme_id}}</td>
