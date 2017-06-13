@@ -1,33 +1,56 @@
-@extends('layouts.app')
+@extends('main')
+
+@section('title', '| Criar Nova Lista')
+
+@section('stylesheets')
+
+	{!! Html::style('css/parsley.css') !!}
+	{!! Html::style('css/select2.min.css') !!}
+
+@endsection
+
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="page-header">
-                    Cadastrar nova Lista
-                </h1>
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1>Criar nova Lista</h1>
+			<hr>
+
+			{!! Form::open(array('route' => 'listas.store', 'data-parsley-validate' => '')) !!}
+				{{ Form::label('nome', 'Nome:') }}
+				{{ Form::text('nome', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255')) }}
+
+				{{ Form::label('descricao', 'Descrição:') }}
+				{{ Form::text('descricao', null, array('class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255') ) }}
+
+				{{ Form::label('filmes', 'Filmes:') }}
+				<select class="form-control select2-multi" name="filmes[]" multiple="multiple">
+					@foreach($filmes as $filme)
+						<option value='{{ $filme->id }}'>{{ $filme->titulo }}</option>
+					@endforeach
+
+				</select>
+                @if (Auth::check())
+                        <input id="user_id" class="form-control" name="user_id" type="hidden" value="{{Auth::user()->name}}">
+                @else
+
+                @endif
+
+				{{ Form::submit('Criar Lista', array('class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px;')) }}
+			{!! Form::close() !!}
+		</div>
+	</div>
+
+@endsection
 
 
-                <form method="post" action="{{ route('listas.store') }}">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        <label for="filme">Filme</label>
-                        
-                            
-                            @foreach($filmes as $filme)
-                                <div class="row">
-                                <input type="checkbox" name="filme_id[]" value="{{$filme->id->filme}}">{{$filme->titulo}}
-                                </div>
-                            @endforeach
-                            
-                        
-                       
-                    </div>
+@section('scripts')
 
-                    <button class="btn" type="submit">Cadastrar</button>
+	{!! Html::script('js/parsley.min.js') !!}
+	{!! Html::script('js/select2.min.js') !!}
 
-                </form>
-            </div>
-        </div>
-    </div>
+	<script type="text/javascript">
+		$('.select2-multi').select2();
+	</script>
+
 @endsection

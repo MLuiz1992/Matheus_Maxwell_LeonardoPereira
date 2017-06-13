@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Filme extends Model
 {
+
     public function genero()
     {
         return $this->belongsTo('App\Genero');
@@ -13,7 +14,7 @@ class Filme extends Model
 
     public function listas()
     {
-        return $this->belongsToMany('Lista');
+        return $this->belongsToMany('App\Lista');
     }
     
     public function user()

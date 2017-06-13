@@ -1,48 +1,65 @@
-@extends('layouts.app')
+@extends('main')
+
+@section('title', '| Create New Post')
+
+@section('stylesheets')
+
+	{!! Html::style('css/parsley.css') !!}
+	{!! Html::style('css/select2.min.css') !!}
+
+@endsection
+
 @section('content')
-    @if(Auth::check())
-    <div class="container">
-        <div class="row">
 
-            <h1 class="page-header">Inserção de Filmes</h1>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1>Create New Post</h1>
+			<hr>
 
-            <div class="col-md-6">
-                <form action="{{ route('filmes.store')}}" method="post">
+			{!! Form::open(array('route' => 'posts.store', 'data-parsley-validate' => '')) !!}
+				{{ Form::label('title', 'Title:') }}
+				{{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255')) }}
 
-                    {{csrf_field()}}
+				{{ Form::label('slug', 'Slug:') }}
+				{{ Form::text('slug', null, array('class' => 'form-control', 'required' => '', 'minlength' => '5', 'maxlength' => '255') ) }}
 
-                    <div class="form-group">
-                        <label for="titulo">Titulo</label>
-                        <input id="titulo" class="form-control" type="text" name="titulo" placeholder="Titulo">
+				{{ Form::label('category_id', 'Category:') }}
+				<select class="form-control" name="category_id">
+					@foreach($categories as $category)
+						<option value='{{ $category->id }}'>{{ $category->name }}</option>
+					@endforeach
 
-                    </div>
-                   
-
-                    <div class="form-group">
-                        <label for="ano">Ano</label>
-                        <input id="ano" class="form-control" type="text" name="ano" placeholder="Ano">
-
-                    </div>
+				</select>
 
 
-                    <div class="form-group">
-                        <label for="genero">Gênero</label>
-                        <select name="genero" id="genero" class="form-control">
-                            
-                            @foreach($generos as $genero)
-                                <option value="{{$genero->id}}">{{$genero->nome}}</option>
-                            @endforeach
-                            
-                        
-                        </select>
-                    </div>
-                   
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    @else
-    <h1 class="text-center">Opa fion, tá se achando espertinho né? Faz o login, ô Animal de teta!</h1>
-@endif
+				{{ Form::label('tags', 'Tags:') }}
+				<select class="form-control select2-multi" name="tags[]" multiple="multiple">
+					@foreach($tags as $tag)
+						<option value='{{ $tag->id }}'>{{ $tag->name }}</option>
+					@endforeach
+
+				</select>
+
+
+
+				{{ Form::label('body', "Post Body:") }}
+				{{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
+
+				{{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px;')) }}
+			{!! Form::close() !!}
+		</div>
+	</div>
+
+@endsection
+
+
+@section('scripts')
+
+	{!! Html::script('js/parsley.min.js') !!}
+	{!! Html::script('js/select2.min.js') !!}
+
+	<script type="text/javascript">
+		$('.select2-multi').select2();
+	</script>
+
 @endsection

@@ -1,37 +1,33 @@
-@extends('layouts.app')
+@extends('main')
+
+@section('title', '| Todas as Listas')
+
 @section('content')
-    @if (Auth::check())
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="page-header">
-                    Lista de Reprodução 
-                <a href="/listas/create" class="btn">Cadastrar</a>
-                    
-                </h1>
 
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+			<h1>Listas</h1> 			
+			<a href='\listas\create' class="btn btn-primary">Criar Lista</a>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+						<th>Descrição</th>
+                        <th>Usuário</th>
+					</tr>
+				</thead>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dados da Tabela</div>
-                    <div class="panel-body">
-
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Lista</th>
-                                    <th>Filme</th>
-                                    <th></th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach($filmes->listas as $lista)
-                                <tr>
-                                    <td>{{$lista->id}}</td>
-                                    <td>{{$lista->filme_id}}</td>
-                                    <td>
-                                        <a class="btn" href="/listas/{{$lista->id}}/edit">
+				<tbody>
+					@foreach ($listas as $lista)
+					<tr>
+						<th>{{ $lista->id }}</th>
+						<td>{{ $lista->nome }}</td>
+						<td>{{ $lista->descricao }}</td>
+						<td>{{ $lista->user_id }}</td>
+						<td><a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
                                             Editar
                                         </a>
 
@@ -41,24 +37,15 @@
 
                                             <input type="hidden" name="_method" value="delete">
 
-                                            <button class="btn">Apagar</button>
+                                            <button class="btn btn-danger">Apagar</button>
 
                                         </form>
+                                        </td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div> <!-- end of .col-md-8 -->
 
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
 
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @else
-    <h1 class="text-center">Opa fion,n eh admin?, tá em manutenção meu parssa...</h1>
-    @endif
 @endsection

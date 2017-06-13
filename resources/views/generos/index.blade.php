@@ -1,33 +1,27 @@
-@extends('layouts.app')
+@extends('main')
+
+@section('title', '| Todos os Gêneros')
+
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="page-header">Lista de Gêneros</h1>
 
-                <a href="/generos/create" class="btn" style="margin-bottom: 15px;">Cadastrar</a>
+	<div class="row">
+		<div class="col-md-6">
+			<h1>Gêneros</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+					</tr>
+				</thead>
 
-                <div class="panel">
-                    <div class="panel-heading">Tabela de Dados</div>
-                    <div class="panel-body">
-
-
-                        
-
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                            @forelse ($generos as $genero)
-                                <tr>
-                                    <td>{{$genero->id}}</td>
-                                    <td>{{$genero->nome}}</td>
-                                    <td><a class="btn btn-primary" href="/generos/{{$genero->id}}/edit">
+				<tbody>
+					@foreach ($generos as $genero)
+					<tr>
+						<th>{{ $genero->id }}</th>
+						<td>{{ $genero->nome }}</td>
+						<td>@if (Auth::check())
+                        <a class="btn btn-primary" href="/generos/{{$genero->id}}/edit">
                                             Editar
                                         </a>
 
@@ -40,26 +34,32 @@
                                             <button class="btn btn-danger">Apagar</button>
 
                                         </form>
+                                        @else
+                                        @endif
+                                        </td>
 
-                                    </td>
-                                </tr>
-                             @empty
-                                <tr><td>Sem resultados</td></tr>
-                             @endforelse
-                                
-                            </tbody>
-                        </table>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div> <!-- end of .col-md-8 -->
 
-                    </div>
-                </div>
+		<div class="col-md-5">
+			<div class="well">
+				{!! Form::open(['route' => 'generos.store', 'method' => 'POST']) !!}
+					<h2>Cadastrar novo Gêneros</h2>
+					{{ Form::label('nome', 'Gênero:') }}
+					{{ Form::text('nome', null, ['class' => 'form-control']) }}
 
-
-
-
-
-
-            </div>
-        </div>
-    </div>
+					&nbsp
+					@if(Auth::check())
+                    {{ Form::submit('Criar novo Gênero', ['class' => 'btn btn-primary btn-block btn-h1-spacing']) }}
+                    @else
+                    <button class="btn btn-primary btn-block btn-h1-spacing" type="submit" disabled="disabled">Faça o login para Cadastrar!</button>
+                    @endif
+				{!! Form::close() !!}
+			</div>
+		</div>
+	</div>
 
 @endsection

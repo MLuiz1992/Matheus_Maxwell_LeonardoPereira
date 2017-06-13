@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Lista;
 use App\Filme;
+use App\User;
 use Illuminate\Http\Request;
+use Session;
 
 class ListaController extends Controller
 {
@@ -15,9 +17,8 @@ class ListaController extends Controller
      */
     public function index()
     {
-        $listas = Lista::with('filme')->get();
-
-        return view('listas.index', compact('filme', 'listas'));
+        $listas = Lista::with('user')->get();
+        return view('listas.index', compact('listas'));
     }
 
     /**
@@ -27,8 +28,9 @@ class ListaController extends Controller
      */
     public function create()
     {
-        $filmes = Filme::all();        
-        return view('listas.create', compact('filmes'));
+        $users = User::all();
+        $filmes = Filme::all();
+        return view('listas.create', compact('users', 'filmes'));
     }
 
     /**
@@ -38,17 +40,23 @@ class ListaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {    
         //cria uma lista
         $lista = new Lista();
         //pega os dados da lista
-        $lista->filme_id = $request->filme;
-        //salva a lista
+        $lista->nome = $request->nome;
+        $lista->descricao = $request->descricao;
+        $lista->user_id = $request->user_id;
+        //salva os dados
         $lista->save();
         //retorna ;D
+        $lista->filmes()->sync($request->filmes, false);
+        Session::flash('success', 'A lista foi criada com sucesso!');
         return redirect('listas');
 
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -56,9 +64,10 @@ class ListaController extends Controller
      * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function show(Lista $lista)
+    public function show($id)
     {
-        //
+        $lista = Lista::findOrFail('listum_id');    
+        return view('listas.show')->with('lista', $lista);
     }
 
     /**
@@ -83,8 +92,8 @@ class ListaController extends Controller
      */
     public function update(Request $request, Lista $lista)
     {
-        $lista->titulo = $request->titulo;
-        $lista->filme_id = $request->filme;
+        $lista->nome = $request->nome;
+        $lista->descricao = $request->descricao;
         $lista->save();
         return redirect('listas');
 
@@ -99,7 +108,14 @@ class ListaController extends Controller
     public function destroy(Lista $lista)
     {
         $lista->delete();
-        return redirect('listas');
+        return redirect('/listas');
 
+    }
+
+    public function addLista(){
+        $lista = Lista::find('lista_id');
+        $lista->filmes()->attach('filme_id');
+        $lista->save();
+        return redirect ('listas');
     }
 }

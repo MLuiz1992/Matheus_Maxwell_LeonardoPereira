@@ -1,10 +1,11 @@
-@extends('layouts.app')
-        @section('content')
-            <div class="container">
-            <h1 class='text-center'>Escolha dentre as opções abaixo:</h1>
-            <p><a class="btn col-md-12" href="/atores">Atores</a></p>&nbsp
-            <p><a class="btn col-md-12" href="/generos">Gêneros</a></p>&nbsp
-            <p><a class="btn col-md-12" href="/filmes">Filmes</a></p>&nbsp
-            <p><a class="btn col-md-12" href="/listas">Listas - Not Working Yet</a></p>
-            </div>
-        @endsection
+@extends('main')
+
+@section('title', '| Todas as Listas')
+
+@section('content')
+    <div class="container text-center">
+    <h1>
+    Seja bem vindo ao sistema, faça o Login para continuar!
+    </h1>
+    </div>
+@endsection

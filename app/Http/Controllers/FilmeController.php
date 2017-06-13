@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lista;
 use App\Filme;
 use App\Genero;
 use Illuminate\Http\Request;
@@ -17,8 +18,8 @@ class FilmeController extends Controller
     {
         
         $filmes = Filme::with('genero')->get();
-
-        return view('filmes.index', compact('filmes'));
+        $generos = Genero::all();
+        return view('filmes.index', compact('filmes', 'generos'));
     }
 
     /**
@@ -54,7 +55,9 @@ class FilmeController extends Controller
         return redirect('filmes');
     }
 
-    /**
+    
+
+     /**
      * Display the specified resource.
      *
      * @param  \App\Filme  $filme
@@ -106,4 +109,5 @@ class FilmeController extends Controller
         $filme->delete();
         return redirect('/filmes');
     }
+
 }

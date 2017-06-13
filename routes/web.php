@@ -20,8 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/form', 'SiteController@form');
 Route::post('/form', 'SiteController@insert');
+Route::get('/addfilme', 'FilmeListaController@addFilme');
 
 Route::resource('atores', 'AtorController');
 Route::resource('filmes', 'FilmeController');
 Route::resource('generos', 'GeneroController');
 Route::resource('listas', 'ListaController');
+Route::resource('flistas', 'FilmeListaController');

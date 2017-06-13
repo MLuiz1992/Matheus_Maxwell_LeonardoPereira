@@ -8,7 +8,7 @@ class Lista extends Model
 {
    public function filmes()
     {
-        return $this->belongsToMany('Filme');
+        return $this->belongsToMany('App\Filme');
     }
    public function user()
     {
