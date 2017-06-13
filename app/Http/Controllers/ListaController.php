@@ -17,8 +17,14 @@ class ListaController extends Controller
      */
     public function index()
     {
-        $listas = Lista::with('user')->get();
-        return view('listas.index', compact('listas'));
+        $listas = Lista::with('user', 'avaliacao')->get();
+        return view('listas.index', compact('listas', 'avaliacao'));
+    }
+
+    public function indexnome()
+    {
+        $listas = Lista::with('user')->orderBy('user_id')->get();
+        return view('listas.indexnome', compact('listas'));
     }
 
     /**

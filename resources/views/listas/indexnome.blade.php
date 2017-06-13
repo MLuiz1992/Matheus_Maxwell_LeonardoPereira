@@ -9,7 +9,7 @@
 			<div class="row">
 			<h1>Listas</h1> 			
 			<a href='\listas\create' class="btn btn-primary">Criar Lista</a>
-			<a href='\lists\indexnome' class="btn btn-primary">Filtrar por nome de usuário</a>
+			<a href='\listas' class="btn btn-primary">Filtrar por ID</a>
 			</div>
 			<table class="table">
 				<thead>
@@ -18,7 +18,7 @@
 						<th>Nome</th>
 						<th>Descrição</th>
                         <th>Usuário</th>
-                        <th></th>
+                        <th>Avaliação</th>
 					</tr>
 				</thead>
 

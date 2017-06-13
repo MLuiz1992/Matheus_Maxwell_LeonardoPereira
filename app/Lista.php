@@ -14,4 +14,9 @@ class Lista extends Model
     {
         return $this->belongsTo('App\User');
     }
+    
+   public function avaliacao()
+    {
+        return $this->hasMany('App\Avaliacao');
+    }
 }

@@ -30,6 +30,7 @@
 					@endforeach
 
 				</select>
+
                 @if (Auth::check())
                         <input id="user_id" class="form-control" name="user_id" type="hidden" value="{{Auth::user()->name}}">
                 @else

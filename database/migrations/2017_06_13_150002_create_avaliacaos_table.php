@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSomeMovies extends Migration
+class CreateAvaliacaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class AddSomeMovies extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('avaliacaos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('avaliacao');
+            $table->integer('lista_id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class AddSomeMovies extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('avaliacaos');
     }
 }
