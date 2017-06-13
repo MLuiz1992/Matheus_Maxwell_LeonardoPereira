@@ -1,43 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('main')
 
-<head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-</head>
+@section('title', '| Edit Blog Post')
 
-<body>
+@section('stylesheets')
 
-    <div class="container">
-        <div class="row">
+	{!! Html::style('css/select2.min.css') !!}
 
-            <h1 class="page-header">Edição de Ator</h1>
+@endsection
 
-            <div class="col-md-6">
-                <form method="post" action="{{ route('listas.store') }}">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        <label for="filme">Filme</label>
-                        <select multiple name="filme" class="form-control">
-                            
-                            @foreach($filmes as $filme)
-                                <option value="{{$filme->id}}">{{$filme->titulo}}</option>
-                            @endforeach
-                            
-                        
-                        </select>
-                    </div>
+@section('content')
 
-                    <button class="btn" type="submit">Cadastrar</button>
+	<div class="row">
+		{!! Form::model($lista, ['route' => ['listas.update', $lista->id], 'method' => 'PUT']) !!}
+		<div class="col-md-8">
+			{{ Form::label('nome', 'Nome:') }}
+			{{ Form::text('nome', null, ["class" => 'form-control input-lg']) }}
 
-                </form>
+			{{ Form::label('Filmes', 'Filmes:', ['class' => 'form-spacing-top']) }}
+			{{ Form::select('filmes[]', $filmes, null, ['class' => 'form-control select2-multi', 'multiple' => 'multiple']) }}
+			
+			{{ Form::label('descricao', "Descrição:", ['class' => 'form-spacing-top']) }}
+			{{ Form::textarea('descricao', null, ['class' => 'form-control']) }}
 
-        </div>
-    </div>
+			                        <input id="user_id" class="form-control" name="user_id" type="hidden" value="{{Auth::user()->name}}">
 
-</body>
+		</div>
 
-</html>
+		<div class="col-md-4">
+			<div class="well">
+				<dl class="dl-horizontal">
+					<dt>Criado em:</dt>
+					<dd>{{ date('M j, Y h:ia', strtotime($lista->created_at)) }}</dd>
+				</dl>
+
+				<dl class="dl-horizontal">
+					<dt>Modificado em:</dt>
+					<dd>{{ date('M j, Y h:ia', strtotime($lista->updated_at)) }}</dd>
+				</dl>
+				<hr>
+				<div class="row">
+					<div class="col-sm-6">
+						{!! Html::linkRoute('listas.show', 'Cancel', array($lista->id), array('class' => 'btn btn-danger btn-block')) !!}
+					</div>
+					<div class="col-sm-6">
+						{{ Form::submit('Salvar Modificações', ['class' => 'btn btn-success btn-block']) }}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		{!! Form::close() !!}
+	</div>	<!-- end of .row (form) -->
+
+@stop
+
+@section('scripts')
+
+	{!! Html::script('js/select2.min.js') !!}
+
+	<script type="text/javascript">
+
+		$('.select2-multi').select2();
+		$('.select2-multi').select2().val({!! json_encode($lista->filmes()->allRelatedIds())
+			!!}).trigger('change');
+
+	</script>
+
+@endsection

@@ -23,7 +23,7 @@
 				<tbody>
 					@foreach ($listas as $lista)
 					<tr>
-						<th>{{ $lista->id }}</th>
+						<th><a class="btn btn-warning" href="/listas/{{$lista->id}}">{{$lista->id}}</a></th>
 						<td>{{ $lista->nome }}</td>
 						<td>{{ $lista->descricao }}</td>
 						<td>{{ $lista->user_id }}</td>

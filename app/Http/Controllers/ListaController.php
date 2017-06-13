@@ -52,7 +52,7 @@ class ListaController extends Controller
         //retorna ;D
         $lista->filmes()->sync($request->filmes, false);
         Session::flash('success', 'A lista foi criada com sucesso!');
-        return redirect('listas');
+        return redirect()->route('listas.show', $lista->id);
 
     }
 
@@ -66,8 +66,8 @@ class ListaController extends Controller
      */
     public function show($id)
     {
-        $lista = Lista::findOrFail('listum_id');    
-        return view('listas.show')->with('lista', $lista);
+        $lista = Lista::find($id);
+        return view('listas.show')->withLista($lista);
     }
 
     /**
@@ -78,9 +78,15 @@ class ListaController extends Controller
      */
     public function edit(Lista $lista)
     {
+        // find the post in the database and save as a var
+        $listas = Lista::find($lista);
         $filmes = Filme::all();
-        return view('listas.edit', compact('filme', 'listas'));
-
+        $filmes2 = array();
+        foreach ($filmes as $filme) {
+            $filmes2[$filme->id] = $filme->titulo;
+        }
+        // return the view and pass in the var we previously created
+        return view('listas.edit')->withLista($lista)->withFilmes($filmes2);
     }
 
     /**
@@ -90,13 +96,30 @@ class ListaController extends Controller
      * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lista $lista)
+    public function update(Request $request, $id)
     {
+                // Validate the data
+        $lista = Lista::find($id);
+        
+        // Save the data to the database
         $lista->nome = $request->nome;
         $lista->descricao = $request->descricao;
-        $lista->save();
-        return redirect('listas');
+        $lista->user_id = $request->user_id;
 
+        $lista->save();   
+
+        if (isset($request->filmes)) {
+            $lista->filmes()->sync($request->filmes);
+        } else {
+            $lista->filmes()->sync(array());
+        }
+             
+
+        // set flash data with success message
+        Session::flash('success', 'A lista foi atualizada com sucesso!');
+
+        // redirect with flash data to posts.show
+        return redirect()->route('listas.show', $lista->id);
     }
 
     /**
@@ -105,17 +128,15 @@ class ListaController extends Controller
      * @param  \App\Lista  $lista
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lista $lista)
+    public function destroy($id)
     {
+        $lista = Lista::find($id);
+        $lista->filmes()->detach();
         $lista->delete();
-        return redirect('/listas');
+
+        Session::flash('success', 'A lista foi deletada com sucesso.');
+        return redirect()->route('listas.index');
 
     }
 
-    public function addLista(){
-        $lista = Lista::find('lista_id');
-        $lista->filmes()->attach('filme_id');
-        $lista->save();
-        return redirect ('listas');
-    }
 }
