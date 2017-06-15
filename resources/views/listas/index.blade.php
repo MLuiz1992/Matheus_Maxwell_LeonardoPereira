@@ -7,9 +7,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-			<h1>Listas</h1> 			
+			<h1>Listas</h1> 	
+			@if (Auth::check())		
 			<a href='\listas\create' class="btn btn-primary">Criar Lista</a>
 			<a href='\lists\indexnome' class="btn btn-primary">Filtrar por nome de usuário</a>
+			@else
+			<a href='\lists\indexnome' class="btn btn-primary">Filtrar por nome de usuário</a>
+			@endif
 			</div>
 			<table class="table">
 				<thead>
@@ -29,7 +33,8 @@
 						<td>{{ $lista->nome }}</td>
 						<td>{{ $lista->descricao }}</td>
 						<td>{{ $lista->user_id }}</td>
-						<td><a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
+						<td>@if (Auth::check())
+                        <a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
                                             Editar
                                         </a>
 
@@ -42,12 +47,13 @@
                                             <button class="btn btn-danger">Apagar</button>
 
                                         </form>
+                                        @else
+                                        @endif
                                         </td>
+
 					</tr>
 					@endforeach
 				</tbody>
 			</table>
 		</div> <!-- end of .col-md-8 -->
-
-
 @endsection

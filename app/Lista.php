@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lista extends Model
 {
+
    public function filmes()
     {
         return $this->belongsToMany('App\Filme');
@@ -15,8 +16,8 @@ class Lista extends Model
         return $this->belongsTo('App\User');
     }
     
-   public function avaliacao()
+   public function comments()
     {
-        return $this->hasMany('App\Avaliacao');
+        return $this->hasMany('App\Comment');
     }
 }

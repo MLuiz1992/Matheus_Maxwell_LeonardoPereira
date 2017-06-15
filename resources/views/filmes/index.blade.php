@@ -24,7 +24,8 @@
 						<td>{{ $filme->titulo }}</td>
 						<td>{{ $filme->ano }}</td>
 						<td>{{ $filme->genero->nome }}</td>
-						<td><a class="btn btn-primary" href="/filmes/{{$filme->id}}/edit">
+						<td>@if (Auth::check())
+                        <a class="btn btn-primary" href="/filmes/{{$filme->id}}/edit">
                                             Editar
                                         </a>
 
@@ -37,7 +38,10 @@
                                             <button class="btn btn-danger">Apagar</button>
 
                                         </form>
+                                        @else
+                                        @endif
                                         </td>
+
 					</tr>
 					@endforeach
 				</tbody>
@@ -64,8 +68,11 @@
                         
                         </select>
 						&nbsp
-					{{ Form::submit('Criar novo Filme', ['class' => 'btn btn-primary btn-block btn-h1-spacing']) }}
-				
+					@if(Auth::check())
+                    {{ Form::submit('Criar novo Filme', ['class' => 'btn btn-primary btn-block btn-h1-spacing']) }}
+                    @else
+                    <button class="btn btn-primary btn-block btn-h1-spacing" type="submit" disabled="disabled">Faça o login para Cadastrar!</button>
+                    @endif				
 				{!! Form::close() !!}
 			</div>
 		</div>

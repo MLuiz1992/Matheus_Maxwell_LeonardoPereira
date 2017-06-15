@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function listas(){
         return $this->hasMany('App/Lista');
     }
+
+    public function comments(){
+        return $this->hasMany('App/Comment');
+    }
 }

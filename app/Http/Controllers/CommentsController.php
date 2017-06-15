@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 use App\Lista;
-use App\Filme;
+use App\User;
+use Session;
 
-class FilmeListaController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +27,7 @@ class FilmeListaController extends Controller
      */
     public function create()
     {
-        $filmes = Filme::all();
-        return view('FilmeLista.create', compact('filmes'));
+        //
     }
 
     /**
@@ -35,12 +36,22 @@ class FilmeListaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $lista_id)
     {
-        $filme = Filme::find('filme_id');
-        $filme->filme_id = $request->filme_id;
-        $filme->listas()->attach('lista_id');
-        $filme->save();
+        $lista = Lista::find($lista_id);
+
+        $comment = new Comment();
+        $comment->nota = $request->nota;
+        $media = collect([$request->nota])->avg('nota');
+        $comment->comment = $request->comment;
+        $comment->user_id = $request->user_id;
+        $comment->lista()->associate($lista);
+
+        $comment->save();
+
+        Session::flash('success', 'Avaliação feita com sucesso');
+
+        return redirect()->route('listas.show', [$lista->id]);
     }
 
     /**

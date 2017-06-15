@@ -29,3 +29,6 @@ Route::resource('filmes', 'FilmeController');
 Route::resource('generos', 'GeneroController');
 Route::resource('listas', 'ListaController');
 Route::resource('flistas', 'FilmeListaController');
+
+//Avaliações
+Route::post('comments/{post_id}', ['uses' => 'CommentsController@store', 'as' => 'comments.store']);

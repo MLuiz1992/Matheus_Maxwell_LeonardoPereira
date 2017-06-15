@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Genero;
 use App\Filme;
+use Session;
 use Illuminate\Http\Request;
 
 class GeneroController extends Controller
@@ -53,6 +54,7 @@ class GeneroController extends Controller
         //salva o genero
         $genero->save();
         
+        Session::flash('success', "Gênero Criado com Sucesso!");
 
         //retorna ;D
         return redirect('/generos');

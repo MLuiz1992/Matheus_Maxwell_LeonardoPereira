@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lista;
 use App\Filme;
 use App\Genero;
+use Session;
 use Illuminate\Http\Request;
 
 class FilmeController extends Controller
@@ -52,6 +53,7 @@ class FilmeController extends Controller
         //salva o filme
         $filme->save();
         //retorna :D
+        Session::flash('success', "Filme cadastrado com sucesso!");
         return redirect('filmes');
     }
 

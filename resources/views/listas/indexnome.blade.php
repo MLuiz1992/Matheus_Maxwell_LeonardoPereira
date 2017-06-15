@@ -8,8 +8,12 @@
 		<div class="col-md-12">
 			<div class="row">
 			<h1>Listas</h1> 			
+			@if (Auth::check())
 			<a href='\listas\create' class="btn btn-primary">Criar Lista</a>
 			<a href='\listas' class="btn btn-primary">Filtrar por ID</a>
+			@else
+			<a href='\listas' class="btn btn-primary">Filtrar por ID</a>
+			@endif
 			</div>
 			<table class="table">
 				<thead>
@@ -18,7 +22,7 @@
 						<th>Nome</th>
 						<th>Descrição</th>
                         <th>Usuário</th>
-                        <th>Avaliação</th>
+						<th></th>
 					</tr>
 				</thead>
 
@@ -29,7 +33,8 @@
 						<td>{{ $lista->nome }}</td>
 						<td>{{ $lista->descricao }}</td>
 						<td>{{ $lista->user_id }}</td>
-						<td><a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
+						<td>@if (Auth::check())
+                        <a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
                                             Editar
                                         </a>
 
@@ -42,7 +47,10 @@
                                             <button class="btn btn-danger">Apagar</button>
 
                                         </form>
+                                        @else
+                                        @endif
                                         </td>
+
 					</tr>
 					@endforeach
 				</tbody>

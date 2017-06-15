@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Edit Blog Post')
+@section('title', '| Editar Lista')
 
 @section('stylesheets')
 
@@ -40,7 +40,7 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-6">
-						{!! Html::linkRoute('listas.show', 'Cancel', array($lista->id), array('class' => 'btn btn-danger btn-block')) !!}
+						{!! Html::linkRoute('listas.show', 'Cancelar', array($lista->id), array('class' => 'btn btn-danger btn-block')) !!}
 					</div>
 					<div class="col-sm-6">
 						{{ Form::submit('Salvar Modificações', ['class' => 'btn btn-success btn-block']) }}

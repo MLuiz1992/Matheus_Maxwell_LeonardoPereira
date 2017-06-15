@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lista;
 use App\Filme;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use Session;
 
@@ -17,12 +18,13 @@ class ListaController extends Controller
      */
     public function index()
     {
-        $listas = Lista::with('user', 'avaliacao')->get();
-        return view('listas.index', compact('listas', 'avaliacao'));
+        $listas = Lista::with('user')->get();
+        return view('listas.index', compact('listas'));
     }
 
     public function indexnome()
     {
+        $user = User::all();
         $listas = Lista::with('user')->orderBy('user_id')->get();
         return view('listas.indexnome', compact('listas'));
     }
@@ -73,7 +75,9 @@ class ListaController extends Controller
     public function show($id)
     {
         $lista = Lista::find($id);
-        return view('listas.show')->withLista($lista);
+        $aux = Comment::all();
+        $comment = Comment::all()->where('lista_id', $lista->id)->avg('nota');
+        return view('listas.show')->withLista($lista)->withComment($comment);
     }
 
     /**
@@ -144,5 +148,6 @@ class ListaController extends Controller
         return redirect()->route('listas.index');
 
     }
+
 
 }
