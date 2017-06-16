@@ -37,18 +37,36 @@
 			<table class="table table-striped">
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>Usuário</th>
 					<th>Nota</th>
 					<th>Comentário</th>
+					<th></th>
 				<tr>	
 			</thead>
 
 			<tbody>
 				@foreach ($lista->comments as $comment)
 				<tr>
+					<th> {{ $comment->id }} </th>
 					<td> {{ $comment->user_id }} </td>
 					<td> {{ $comment->nota }}/10 </td>					
 					<td> {{ $comment->comment }} </td>
+					<td>
+					@if (Auth::check())
+							<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+							<form style="display: inline;" action="{{route('comments.destroy', $comment->id)}}" method="post">
+                                        
+                                 {{csrf_field()}}
+
+                                <input type="hidden" name="_method" value="delete">
+
+                                <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+
+                            </form>	
+					@else
+					@endif	
+					</td>
 				</tr>	
 				@endforeach
 				</tbody>
@@ -87,7 +105,7 @@
 						{{ Form::label('nota', "Nota:") }}
 						<input type="number" min="0" max="10" class="form-control" name="nota" value="nota" placeholder="Digite uma nota de 0 a 10 se desejar">
 						{{ Form::label('comment', "Comentário:") }}
-						{{ Form::text('comment', null, ['class' =>'form-control']) }}
+						{{ Form::text('comment', null, ['class' =>'form-control', 'placeholder' => 'Digite seu comentário']) }}
 						</div>
 					&nbsp	
 					<div class="col-sm-12">
@@ -115,7 +133,7 @@
 				&nbsp
 				<div class="row">
 					<div class="col-md-12">
-						{{ Html::linkRoute('listas.index', '<< Ver Todas as Listas', array(), ['class' => 'btn btn-default btn-block btn-h1-spacing']) }}
+						{{ Html::linkRoute('listas.index', '', array(), ['class' => 'btn btn-default btn-block btn-h1-spacing glyphicon glyphicon-arrow-left']) }}
 					</div>
 				</div>
 

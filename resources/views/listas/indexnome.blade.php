@@ -22,17 +22,19 @@
 						<th>Nome</th>
 						<th>Descrição</th>
                         <th>Usuário</th>
-						<th></th>
+                        <th>Visualizar</th>
+                        <th></th>
 					</tr>
 				</thead>
 
 				<tbody>
 					@foreach ($listas as $lista)
 					<tr>
-						<th><a class="btn btn-warning" href="/listas/{{$lista->id}}">{{$lista->id}}</a></th>
+						<th>{{$lista->id}}</th>
 						<td>{{ $lista->nome }}</td>
 						<td>{{ $lista->descricao }}</td>
 						<td>{{ $lista->user_id }}</td>
+						<td><a class="btn glyphicon glyphicon-eye-open" href="/listas/{{$lista->id}}"></td>
 						<td>@if (Auth::check())
                         <a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
                                             Editar

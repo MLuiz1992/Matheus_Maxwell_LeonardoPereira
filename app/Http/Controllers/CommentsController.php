@@ -73,7 +73,8 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('comments.edit')->withComment($comment);
     }
 
     /**
@@ -85,7 +86,12 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->nota = $request->nota;
+        $comment->comment = $request->comment;
+        $comment->save();
+        Session::flash('success', 'Comentário Atualizado com Sucesso!');
+        return redirect()->route('listas.show', $comment->lista->id);
     }
 
     /**
@@ -96,6 +102,10 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $lista_id = $comment->lista->id;
+        $comment->delete();
+        Session::flash('success', 'Comentário deletado com sucesso');
+        return redirect()->route('listas.show', $lista_id);
     }
 }

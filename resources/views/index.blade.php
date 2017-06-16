@@ -19,10 +19,10 @@
         </div>
         <div class="col-md-6">
         <h2>O que foi utilizado?</h2>
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Tecnologias</th>
+                <th>Tecnologias:</th>
             </tr>
             </thead>
 
@@ -40,11 +40,13 @@
                 <td>HTML</td>
             </tr>
             <tr>
+                <td>Bootstrap</td>
+            </tr>
+            <tr>
                 <td>CSS</td>
             </tr>
             </tbody>
             </table>
-            <hr>
         </div>
        
         <div class="col-md-12">
@@ -63,7 +65,7 @@
         <br />
         <h3>Maxwell Arruda</h3>
         <p align="justify">Nascido na cidade de Varginha-MG, tem 16 anos e também está cursando o último
-        ano do curso técnico de Informática para a Internet na ETEC Pedro Ferreira Alves exercendo paralelamente a função de estagiário
+        ano do curso técnico de Informática para a Internet na ETEC Pedro Ferreira Alves exercendo paralelamente a função de estagiário,
         torce para o São Paulo Futebol Clube.</p>
 
         </div>
