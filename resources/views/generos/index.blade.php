@@ -47,7 +47,7 @@
 		<div class="col-md-5">
 			<div class="well">
 				{!! Form::open(['route' => 'generos.store', 'method' => 'POST']) !!}
-					<h2>Cadastrar novo Gêneros</h2>
+					<h2>Cadastrar novo Gênero</h2>
 					{{ Form::label('nome', 'Gênero:') }}
 					{{ Form::text('nome', null, ['class' => 'form-control']) }}
 

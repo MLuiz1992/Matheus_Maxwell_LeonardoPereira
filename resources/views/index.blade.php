@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Todas as Listas')
+@section('title', '| Trabalho Matheus e Maxwell')
 
 @section('content')
     <div class="container text-center">

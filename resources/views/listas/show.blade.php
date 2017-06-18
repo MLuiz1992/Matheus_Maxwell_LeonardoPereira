@@ -33,7 +33,10 @@
 
 			<hr>
 			<h1>Avaliações:</h1>
-			<h3>Média: {{$comment}}</h3>
+			<h3>Média:{{$comment}}</h3>
+			
+			<input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#avaliacao" value="Detalhes">
+			<div id="avaliacao" class="collapse">
 			<table class="table table-striped">
 			<thead>
 				<tr>
@@ -71,7 +74,7 @@
 				@endforeach
 				</tbody>
 			</table>	
-
+			</div>
 		</div>
 
 				<div class="col-md-4">
@@ -115,7 +118,7 @@
 					</div>
 				</dl>
 				<hr>
-				@if (Auth::check())
+				@if (Auth::check() && $lista->user_id == Auth::user()->name )
 				<div class="row">
 					<div class="col-sm-6">
 						{!! Html::linkRoute('listas.edit', 'Editar', array($lista->id), array('class' => 'btn btn-primary btn-block')) !!}
