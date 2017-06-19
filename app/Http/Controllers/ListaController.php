@@ -144,7 +144,7 @@ class ListaController extends Controller
         $lista->filmes()->detach();
         $lista->delete();
 
-        Session::flash('success', 'A lista foi deletada com sucesso.');
+        Session::flash('success', 'É fion...já elvis!');
         return redirect()->route('listas.index');
 
     }

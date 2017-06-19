@@ -44,9 +44,27 @@
                                         
                                              {{csrf_field()}}
 
+						<a href="#apagar" class="btn btn-danger" data-toggle="modal">Apagar</a>
+						<div class="modal fade" id="apagar">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+									<h4 class="modal-title">Confirmação</h4>
+									</div>
+									<div class="modal-body">
+										<p>Deseja realmente apagar esta lista?</p>
+										<p class="text-warning"><small>Só pra constar, todo o seu conteúdo será excluído permanentemente!</small></p>
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                             <input type="hidden" name="_method" value="delete">
 
-                                            <button class="btn btn-danger">Apagar</button>
+                                            <button class="btn btn-danger">Apagar Para Todo o Sempre!</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
                                         </form>
                                         @else

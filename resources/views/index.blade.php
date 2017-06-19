@@ -5,11 +5,11 @@
 @section('content')
     <div class="container text-center">
     @if (Auth::check())
-        <h1>Seja bem-vindo! Navegue à vontade!</h1>
+        <h1>Seja bem-vindo ao CinEMIA! Navegue à vontade!</h1>
         </div>
         <div class="col-md-6">
             <h2>Sobre:</h2>
-            <p align="justify">Sistema desenvolvido por Matheus Oliveira e Maxwell Arruda
+            <p align="justify">O CinEMIA foi desenvolvido por Matheus Oliveira e Maxwell Arruda
             como atividade para a aula de Programação para a Web II. Nele
             o usuário logado tem a permissão de cadastrar Filmes, Gêneros,
             e Listas de Reprodução, além de poder avaliar e visualizar as
@@ -76,5 +76,26 @@
     Seja bem vindo ao sistema, faça o Login para continuar!
     </h1>
     @endif
+    </div>
+    <div class="col-md-12">
+    	<a href="#ovodepascoa" class="btn btn-default btn-block" data-toggle="modal">Clique Aqui!</a>
+						<div class="modal fade" id="ovodepascoa">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+									<h4 class="modal-title">Plantão</h4>
+									</div>
+									<div class="modal-body">
+                                        <h1>Palmeiras não tem Mundial! KKKKKKK</h1>	
+                                    </div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Retornar ao Site!</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
     </div>
 @endsection
