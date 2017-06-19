@@ -35,7 +35,7 @@
 						<td>{{ $lista->descricao }}</td>
 						<td>{{ $lista->user_id }}</td>
 						<td><a class="btn glyphicon glyphicon-eye-open" href="/listas/{{$lista->id}}"></td>
-						<td>@if (Auth::check())
+						<td>@if (Auth::check() && $lista->user_id == Auth::user()->name )
                         <a class="btn btn-primary" href="/listas/{{$lista->id}}/edit">
                                             Editar
                                         </a>

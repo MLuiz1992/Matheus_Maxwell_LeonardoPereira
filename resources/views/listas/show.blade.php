@@ -33,7 +33,7 @@
 
 			<hr>
 			<h1>Avaliações:</h1>
-			<h3>Média:{{$comment}}</h3>
+			<h3>Média:{{$comment}}/10</h3>
 			
 			<input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#avaliacao" value="Detalhes">
 			<div id="avaliacao" class="collapse">
