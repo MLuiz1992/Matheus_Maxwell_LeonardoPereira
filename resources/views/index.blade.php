@@ -77,6 +77,7 @@
     </h1>
     @endif
     </div>
+    @if (Auth::check())
     <div class="col-md-12">
     	<a href="#ovodepascoa" class="btn btn-default btn-block" data-toggle="modal">Clique Aqui!</a>
 						<div class="modal fade" id="ovodepascoa">
@@ -98,4 +99,6 @@
 
 
     </div>
+    @else
+    @endif
 @endsection
