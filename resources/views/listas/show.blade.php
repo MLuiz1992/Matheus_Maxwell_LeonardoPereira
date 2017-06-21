@@ -34,7 +34,7 @@
 
 			<hr>
 			<h1>Avaliações:</h1>
-			<p class="lead">Média:{{$comment}}/10</p>
+			<p class="lead">Média:{{$comment}}/5</p>
 			
 			<input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#avaliacao" value="Detalhes">
 			<div id="avaliacao" class="collapse">
@@ -52,7 +52,45 @@
 				@foreach ($lista->comments as $comment)
 				<tr>
 					<td> {{ $comment->user_id }} </td>
-					<td> {{ $comment->nota }}/10 </td>					
+					<td>
+					@if ($comment->nota == 0)
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+					@elseif ($comment->nota == 1)
+						<span class="rate_star checked"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+					@elseif ($comment->nota == 2)
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+					@elseif ($comment->nota == 3)
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star"></span>
+						<span class="rate_star"></span>
+					@elseif ($comment->nota == 4)
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star"></span>
+					@else
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						<span class="rate_star checked"></span>
+						@endif
+					</td>					
 					<td> {{ $comment->comment }} </td>
 					<td>
 					@if (Auth::check() && $comment->user_id == Auth::user()->name)
@@ -90,7 +128,7 @@
 					@else
 					@endif	
 					</td>
-				</tr>	
+				</tr>
 				@endforeach
 				</tbody>
 			</table>	
@@ -127,11 +165,12 @@
 						<br />
 						@endif
 						{{ Form::label('nota', "Nota:") }}
-						<input type="number" min="0" max="10" class="form-control" name="nota" value="nota" placeholder="Digite uma nota de 0 a 10 se desejar">
+						<div class="rate_row"></div>
 						<br />
 						{{ Form::label('comment', "Comentário:") }}
 						{{ Form::text('comment', null, ['class' =>'form-control', 'placeholder' => 'Digite seu comentário', 'maxlength' => '100']) }}
 						</div>
+						<input type="hidden" id="nota" name="nota" value="" />
 					&nbsp	
 					<div class="col-sm-12">
 					{{ Form::submit('Adicionar Avaliação', ['class' => 'btn btn-success btn-block'])}}
@@ -184,4 +223,28 @@
 			</div>
 		</div>
 	</div>
+@endsection
+@section ('scripts')
+
+	<script type="text/javascript">
+	$ ( document ).ready(function(){
+	$('.rate_row').starwarsjs().val({!! json_encode($comment)
+	!!}).trigger('change');
+
+		 $( document ).ready(function() {
+            $('.rate_row').starwarsjs({
+                stars : 5,
+                count : 1,
+				on_select : function(data){
+					var nota = data;
+					var objetoDados = document.getElementById("nota");
+					objetoDados.value = nota;
+
+				},
+            });
+        }); 
+	});
+
+
+	</script>
 @endsection

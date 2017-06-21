@@ -11,15 +11,42 @@
 			{{ Form::model($comment, ['route' => ['comments.update', $comment->id], 'method' => 'PUT']) }}
 			
 				{{ Form::label('nota', 'Nota:') }}
-				<input type="number" min="0" max="10" class="form-control" name="nota" value="nota" placeholder="Digite uma nota de 0 a 10 se desejar">
-			
+				<div class="rate_row"></div>
+
 				{{ Form::label('comment', 'Comentário:') }}
 				{{ Form::text('comment', null, ['class' => 'form-control', 'placeholder' => 'Digite seu comentário']) }}
-			
+				<input type="hidden" id="nota" name="nota" value="" />
 				{{ Form::submit('Atualizar Comentário', ['class' => 'btn btn-block btn-success', 'style' => 'margin-top: 15px;']) }}
 			
 			{{ Form::close() }}
 		</div>
 	</div>
+
+@endsection
+
+@section('scripts')
+@section ('scripts')
+
+	<script type="text/javascript">
+	$ ( document ).ready(function(){
+	$('.rate_row').starwarsjs().val({!! json_encode($comment->lista())
+	!!}).trigger('change');
+
+		 $( document ).ready(function() {
+            $('.rate_row').starwarsjs({
+                stars : 5,
+                count : 1,
+				on_select : function(data){
+					var nota = data;
+					var objetoDados = document.getElementById("nota");
+					objetoDados.value = nota;
+
+				}
+            });
+        }); 
+	});
+
+
+	</script> 
 
 @endsection

@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('comment');
             $table->string('user_id');
             $table->integer('lista_id')->unsigned();
-            $table->integer('nota');
+            $table->integer('nota')->nullable();
             $table->timestamps();
          
         });

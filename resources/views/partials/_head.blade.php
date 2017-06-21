@@ -6,9 +6,10 @@
 <title>Matheus e Max @yield('title')</title> <!-- CHANGE THIS TITLE FOR EACH PAGE -->
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+{{ Html::style('css/css/bootstrap.css') }}
 {{ Html::style('css/styles.css') }}
 {{ Html::style('css/starwars.css') }}
+
 
 @yield('stylesheets')
 

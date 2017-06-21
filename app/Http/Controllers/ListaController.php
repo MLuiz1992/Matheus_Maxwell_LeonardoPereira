@@ -77,7 +77,8 @@ class ListaController extends Controller
         $lista = Lista::find($id);
         $aux = Comment::all();
         $comment = Comment::all()->where('lista_id', $lista->id)->avg('nota');
-        return view('listas.show')->withLista($lista)->withComment($comment);
+        $count = Comment::all()->where('lista_id', $lista->id)->count('nota');
+        return view('listas.show')->withLista($lista)->withComment($comment)->withCount($count);
     }
 
     /**
